@@ -180,7 +180,9 @@ BOOL RKObjectIsValueEqualToValue(id sourceValue, id destinationValue) {
             dateString = [self.objectMapping.preferredDateFormatter stringFromDate:value];
         }
         return dateString;
-    }
+    } else if([destinationType isSubclassOfClass:[NSMutableDictionary class]]) {
+		return [NSMutableDictionary dictionaryWithDictionary:value];
+	}
     
     RKLogWarning(@"Failed transformation of value at keyPath '%@'. No strategy for transforming from '%@' to '%@'", keyPath, NSStringFromClass([value class]), NSStringFromClass(destinationType));
     
