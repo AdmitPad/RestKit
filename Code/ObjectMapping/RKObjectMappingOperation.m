@@ -159,7 +159,9 @@ BOOL RKObjectIsValueEqualToValue(id sourceValue, id destinationValue) {
         }
     } else if ([destinationType isSubclassOfClass:[NSString class]] && [value respondsToSelector:@selector(stringValue)]) {
         return [value stringValue];
-    }
+    } else if([destinationType isSubclassOfClass:[NSMutableDictionary class]]) {
+		return [NSMutableDictionary dictionaryWithDictionary:value];
+	}
     
     RKLogWarning(@"Failed transformation of value at keyPath '%@'. No strategy for transforming from '%@' to '%@'", keyPath, NSStringFromClass([value class]), NSStringFromClass(destinationType));
     
